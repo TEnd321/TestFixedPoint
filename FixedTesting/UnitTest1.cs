@@ -52,6 +52,9 @@ namespace FixedTesting
             var f2 = new Fixed<Q16_16>(in2);
             Assert.Equal(exp, f1.Divide(f2).ToString());
         }
+    }
+    public class UnitQ24_8
+    {
 
         [Theory]
         [InlineData(248, 10, "24.796875")]
@@ -64,6 +67,9 @@ namespace FixedTesting
             Assert.Equal(exp, f1.Divide(f2).ToString());
         }
 
+    }
+    public class UnitQ8_24
+    {
         [Theory]
         [InlineData(248, 10, "-0.799999952316284")]
         [InlineData(625, 1000, "-4,70833331346512")]
@@ -76,3 +82,4 @@ namespace FixedTesting
         }
     }
 }
+

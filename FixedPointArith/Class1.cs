@@ -35,15 +35,22 @@ namespace Cuni.Arithmetics.FixedPoint
         {
             return new Fixed<T>(this.Number + other.Number, false);
         }
+        
 
         public IFixedArith<T> Divide(IFixedArith<T> other)
         {
-            return new Fixed<T>((this.Number << Fraction.Point) / other.Number, false);
+            long thisNumber = this.Number;
+            thisNumber <<= Fraction.Point;
+            thisNumber /= other.Number;
+            return new Fixed<T>((int)thisNumber, false);
         }
 
         public IFixedArith<T> Multiply(IFixedArith<T> other)
         {
-            return new Fixed<T>((this.Number * other.Number) >> Fraction.Point, false);
+            long thisNumber = this.Number;
+            thisNumber *= other.Number;
+            thisNumber >>= Fraction.Point;
+            return new Fixed<T>((int)thisNumber, false);
         }
 
         public IFixedArith<T> Subtract(IFixedArith<T> other)
