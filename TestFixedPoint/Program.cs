@@ -9,11 +9,12 @@ using Cuni.Arithmetics.FixedPoint;
 
 namespace FixedPointApiTest
 {
-#if STUDENT_VERSION
 	class Program
 	{
 		static void Main(string[] args)
 		{
+			Fixed<Q16_16> @fixed = new Fixed<Q16_16>(1);
+#if STUDENT_VERSION
 			Console.WriteLine("Q24_8:");
 			{
 				var f1 = new Fixed<Q24_8>(3);
@@ -106,7 +107,7 @@ namespace FixedPointApiTest
 				f3 = f1.Divide(f2);
 				Console.WriteLine($"625 / 1000: {f3}");
 			}
+#endif
 		}
 	}
-#endif
 }

@@ -5,44 +5,73 @@ namespace Cuni.Arithmetics.FixedPoint
 {
     public interface IFixedPoint
     {
-        static int Point { get; }
+        int Point { get; }
     }
-    public interface IFixedArith<T> where T : IFixedPoint
-    { 
+    public interface IFixedArith<T> where T : IFixedPoint, new()
+    {
+        T Fraction { get; }
         long Number { get; }
-        IFixedArith<T> Add(IFixedArith<T> a);
-        IFixedArith<T> Subtract(IFixedArith<T> a);
-        IFixedArith<T> Multiply(IFixedArith<T> a);
-        IFixedArith<T> Divide(IFixedArith<T> a);
+        IFixedArith<T> Add(IFixedArith<T> other);
+        IFixedArith<T> Subtract(IFixedArith<T> other);
+        IFixedArith<T> Multiply(IFixedArith<T> other);
+        IFixedArith<T> Divide(IFixedArith<T> other);
     }
 
-    public struct Fixed<T> : IFixedArith<T> where T : IFixedPoint
+    public struct Fixed<T> : IFixedArith<T> where T : IFixedPoint, new()
     {
-
-    }
-
-    public struct Q8_24 : IFixedPoint
-    {
-        static int Point { get; }
-        static Q8_24()
+        public Fixed(long number)
         {
-            Point = 24;    
+            Number = number;
+            Fraction = new T();
+        }
+
+        public long Number { get; }
+
+        public T Fraction { get; }
+
+        public IFixedArith<T> Add(IFixedArith<T> other)
+        {
+            return new Fixed<T>(this.Number + other.Number);
+        }
+
+        public IFixedArith<T> Divide(IFixedArith<T> other)
+        {
+            return null;
+        }
+
+        public IFixedArith<T> Multiply(IFixedArith<T> other)
+        {
+            return new Fixed<T>((this.Number * other.Number) >> Fraction.Point);
+        }
+
+        public IFixedArith<T> Subtract(IFixedArith<T> other)
+        {
+            return new Fixed<T>(this.Number - other.Number);
         }
     }
 
-    public struct Q16_16 : IFixedPoint
+    public class Q8_24 : IFixedPoint
     {
-        static int Point { get; }
-        static Q16_16()
+        public int Point { get; }
+        public Q8_24()
+        {
+            Point = 24;
+        }
+    }
+
+    public class Q16_16 : IFixedPoint
+    {
+        public int Point { get; }
+        public Q16_16()
         {
             Point = 16;
         }
     }
 
-    public struct Q24_8 : IFixedPoint
+    public class Q24_8 : IFixedPoint
     {
-        static int Point { get; }
-        static Q24_8()
+        public int Point { get; }
+        public Q24_8()
         {
             Point = 8;
         }
