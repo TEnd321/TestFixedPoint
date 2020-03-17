@@ -16,12 +16,12 @@ namespace Cuni.Arithmetics.FixedPoint
         IFixedArith<T> Divide(IFixedArith<T> a);
     }
 
-    public class Fixed<T> : IFixedArith<T> where T : IFixedPoint
+    public struct Fixed<T> : IFixedArith<T> where T : IFixedPoint
     {
 
     }
 
-    public class Q8_24 : IFixedPoint
+    public struct Q8_24 : IFixedPoint
     {
         static int Point { get; }
         static Q8_24()
@@ -30,7 +30,7 @@ namespace Cuni.Arithmetics.FixedPoint
         }
     }
 
-    public class Q16_16 : IFixedPoint
+    public struct Q16_16 : IFixedPoint
     {
         static int Point { get; }
         static Q16_16()
@@ -39,7 +39,7 @@ namespace Cuni.Arithmetics.FixedPoint
         }
     }
 
-    public class Q24_8 : IFixedPoint
+    public struct Q24_8 : IFixedPoint
     {
         static int Point { get; }
         static Q24_8()
