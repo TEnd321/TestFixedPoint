@@ -19,10 +19,12 @@ namespace Cuni.Arithmetics.FixedPoint
 
     public struct Fixed<T> : IFixedArith<T> where T : IFixedPoint, new()
     {
-        public Fixed(long number)
+        public Fixed(long number, bool shouldShift = true)
         {
-            Number = number;
             Fraction = new T();
+            Number = number;
+            if (shouldShift)
+                Number <<= Fraction.Point;
         }
 
         public long Number { get; }
@@ -31,22 +33,22 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public IFixedArith<T> Add(IFixedArith<T> other)
         {
-            return new Fixed<T>(this.Number + other.Number);
+            return new Fixed<T>(this.Number + other.Number, false);
         }
 
         public IFixedArith<T> Divide(IFixedArith<T> other)
         {
-            return new Fixed<T>((this.Number << Fraction.Point) / other.Number);
+            return new Fixed<T>((this.Number << Fraction.Point) / other.Number, false);
         }
 
         public IFixedArith<T> Multiply(IFixedArith<T> other)
         {
-            return new Fixed<T>((this.Number * other.Number) >> Fraction.Point);
+            return new Fixed<T>((this.Number * other.Number) >> Fraction.Point, false);
         }
 
         public IFixedArith<T> Subtract(IFixedArith<T> other)
         {
-            return new Fixed<T>(this.Number - other.Number);
+            return new Fixed<T>(this.Number - other.Number, false);
         }
         public override string ToString()
         {
