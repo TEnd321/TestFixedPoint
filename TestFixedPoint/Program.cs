@@ -1,4 +1,4 @@
-﻿#define STUDENT_VERSION
+﻿//#define STUDENT_VERSION
 using System;
 using System.Collections.Generic;
 using System.Linq;
