@@ -10,7 +10,7 @@ namespace Cuni.Arithmetics.FixedPoint
     public interface IFixedArith<T> where T : IFixedPoint, new()
     {
         T Fraction { get; }
-        int Number { get; }
+        long Number { get; }
         IFixedArith<T> Add(IFixedArith<T> other);
         IFixedArith<T> Subtract(IFixedArith<T> other);
         IFixedArith<T> Multiply(IFixedArith<T> other);
@@ -19,7 +19,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
     public struct Fixed<T> : IFixedArith<T> where T : IFixedPoint, new()
     {
-        public Fixed(int number, bool shouldShift = true)
+        public Fixed(long number, bool shouldShift = true)
         {
             Fraction = new T();
             Number = number;
@@ -27,7 +27,7 @@ namespace Cuni.Arithmetics.FixedPoint
                 Number <<= Fraction.Point;
         }
 
-        public int Number { get; }
+        public long Number { get; }
 
         public T Fraction { get; }
 
