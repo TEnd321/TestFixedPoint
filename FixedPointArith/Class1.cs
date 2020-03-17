@@ -3,15 +3,51 @@ using System.Text;
 
 namespace Cuni.Arithmetics.FixedPoint
 {
-    public interface IFixed
+    public interface IFixedPoint
     {
-        int Point { get; }
-        long Number { get; }
+        static int Point { get; }
     }
-    public interface IFixedArith
+    public interface IFixedArith<T> where T : IFixedPoint
+    { 
+        long Number { get; }
+        IFixedArith<T> Add(IFixedArith<T> a);
+        IFixedArith<T> Subtract(IFixedArith<T> a);
+        IFixedArith<T> Multiply(IFixedArith<T> a);
+        IFixedArith<T> Divide(IFixedArith<T> a);
+    }
+
+    public class Fixed<T> : IFixedArith<T> where T : IFixedPoint
     {
 
     }
+
+    public class Q8_24 : IFixedPoint
+    {
+        static int Point { get; }
+        static Q8_24()
+        {
+            Point = 24;    
+        }
+    }
+
+    public class Q16_16 : IFixedPoint
+    {
+        static int Point { get; }
+        static Q16_16()
+        {
+            Point = 16;
+        }
+    }
+
+    public class Q24_8 : IFixedPoint
+    {
+        static int Point { get; }
+        static Q24_8()
+        {
+            Point = 8;
+        }
+    }
+
     public sealed class Printer
     {
         public static Printer Instance => new Printer();
@@ -31,8 +67,5 @@ namespace Cuni.Arithmetics.FixedPoint
             return sb.ToString();
         }
     }
-    public class Fixed
-    {
 
-    }
 }
