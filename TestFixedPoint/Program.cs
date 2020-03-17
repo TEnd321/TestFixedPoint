@@ -13,7 +13,10 @@ namespace FixedPointApiTest
 	{
 		static void Main(string[] args)
 		{
-			Fixed<Q16_16> @fixed = new Fixed<Q16_16>(1);
+			Fixed<Q16_16> f1 = new Fixed<Q16_16>(3);
+			var f2 = new Fixed<Q16_16>(2);
+			var f3 = f2.Add(f1);
+			Console.WriteLine(f3);
 #if STUDENT_VERSION
 			Console.WriteLine("Q24_8:");
 			{
