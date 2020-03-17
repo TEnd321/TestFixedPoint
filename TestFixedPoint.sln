@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestFixedPoint", "TestFixed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedPointArith", "FixedPointArith\FixedPointArith.csproj", "{BCAAF7AD-A9F3-4D1F-B926-E037065EF4DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixedTesting", "FixedTesting\FixedTesting.csproj", "{AAB2AE0D-C9E4-4725-83A5-8A6F80CE6A94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BCAAF7AD-A9F3-4D1F-B926-E037065EF4DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCAAF7AD-A9F3-4D1F-B926-E037065EF4DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCAAF7AD-A9F3-4D1F-B926-E037065EF4DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAB2AE0D-C9E4-4725-83A5-8A6F80CE6A94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB2AE0D-C9E4-4725-83A5-8A6F80CE6A94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB2AE0D-C9E4-4725-83A5-8A6F80CE6A94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAB2AE0D-C9E4-4725-83A5-8A6F80CE6A94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
