@@ -39,10 +39,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public IFixedArith<T> Divide(IFixedArith<T> other)
         {
-            long thisNumber = this.Number;
-            thisNumber <<= Fraction.Point;
-            thisNumber /= other.Number;
-            return new Fixed<T>((int)thisNumber, false);
+            return new Fixed<T>((int)((((long)this.Number) << this.Fraction.Point) / ((long)other.Number)), false);
         }
 
         public IFixedArith<T> Multiply(IFixedArith<T> other)
@@ -59,8 +56,14 @@ namespace Cuni.Arithmetics.FixedPoint
         }
         public override string ToString()
         {
-            long input = Number;
+            int input = Number;
             StringBuilder sb = new StringBuilder();
+            if ((uint)input >= 0x8000_0000)
+            {
+                sb.Append('-');
+                input = ~input;
+                input += 1;
+            }
             sb.Append((input >> Fraction.Point));
             for (int i = 0; ((input & ((1 << Fraction.Point) - 1)) > 0) && (i < Fraction.Point); i++)
             {

@@ -72,7 +72,7 @@ namespace FixedTesting
     {
         [Theory]
         [InlineData(248, 10, "-0.799999952316284")]
-        [InlineData(625, 1000, "-4,70833331346512")]
+        [InlineData(625, 1000, "-4.70833331346512")]
         //[InlineData(14, 12, "26")]
         public void DivisionTestingSameTypesQ8_24(int in1, int in2, string exp)
         {
