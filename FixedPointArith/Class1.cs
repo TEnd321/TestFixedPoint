@@ -91,7 +91,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public bool ToBoolean(IFormatProvider provider)
         {
-            return this.Number > 0;
+            return this.Number != 0;
         }
 
         public byte ToByte(IFormatProvider provider)
@@ -111,9 +111,9 @@ namespace Cuni.Arithmetics.FixedPoint
             var i = thisd - thisi;
             var dt = new DateTime(2000 + thisi, 1, 1);
             if (DateTime.IsLeapYear(2000 + thisi))
-                dt.AddDays(366 * i);
+                dt = dt.AddDays(366 * i);
             else
-                dt.AddDays(365 * i);
+                dt = dt.AddDays(365 * i);
             return dt;
         }
 
@@ -162,12 +162,21 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public sbyte ToSByte(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            var thisNumber = this.Number;
+            if (this.Number < 0)
+            {
+                thisNumber = ~this.Number;
+                thisNumber++;
+                thisNumber >>= this.Fraction.Point;
+                thisNumber *= -1;
+                return (sbyte)thisNumber;
+            }
+            return (sbyte)(thisNumber >> this.Fraction.Point);
         }
 
         public float ToSingle(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return (float)this.ToDouble(null);
         }
 
         public override string ToString()
@@ -199,7 +208,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public object ToType(Type conversionType, IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return this;
         }
 
         public ushort ToUInt16(IFormatProvider provider)
