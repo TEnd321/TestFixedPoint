@@ -68,12 +68,12 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public bool Equals([AllowNull] IFixedArith<T> other)
         {
-            throw new NotImplementedException();
+            return this.Number == other.Number;
         }
 
         public TypeCode GetTypeCode()
         {
-            throw new NotImplementedException();
+            return TypeCode.Object;
         }
 
         public IFixedArith<T> Multiply(IFixedArith<T> other)
@@ -91,47 +91,73 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public bool ToBoolean(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return this.Number > 0;
         }
 
         public byte ToByte(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return (byte)(this.Number >> this.Fraction.Point);
         }
 
         public char ToChar(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return (char)(this.Number >> this.Fraction.Point);
         }
 
         public DateTime ToDateTime(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            var thisi = this.ToInt32(null);
+            var thisd = this.ToDouble(null);
+            var i = thisd - thisi;
+            var dt = new DateTime(2000 + thisi, 1, 1);
+            if (DateTime.IsLeapYear(2000 + thisi))
+                dt.AddDays(366 * i);
+            else
+                dt.AddDays(365 * i);
+            return dt;
         }
 
         public decimal ToDecimal(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return (this.Number >> this.Fraction.Point) + ((decimal)(this.Number & ((1 << this.Fraction.Point) - 1)) / (decimal)(Math.Pow(4, this.Fraction.Point / 4) * Math.Pow(4, this.Fraction.Point / 4)));
         }
 
         public double ToDouble(IFormatProvider provider)
-        {
-            throw new NotImplementedException();
+        { 
+            return (this.Number >> this.Fraction.Point) + ((double)(this.Number & ((1 << this.Fraction.Point) - 1)) / (Math.Pow(4, this.Fraction.Point / 4) * Math.Pow(4, this.Fraction.Point / 4)));
         }
 
         public short ToInt16(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            var thisNumber = this.Number;
+            if (this.Number < 0)
+            {
+                thisNumber = ~this.Number;
+                thisNumber++;
+                thisNumber >>= this.Fraction.Point;
+                thisNumber *= -1;
+                return (short)thisNumber;
+            }
+            return (short)(thisNumber >> this.Fraction.Point);
         }
 
         public int ToInt32(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            var thisNumber = this.Number;
+            if (this.Number < 0)
+            {
+                thisNumber = ~this.Number;
+                thisNumber++;
+                thisNumber >>= this.Fraction.Point;
+                thisNumber *= -1;
+                return thisNumber;
+            }
+            return thisNumber >> this.Fraction.Point;
         }
 
         public long ToInt64(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return (this.ToInt32(null));
         }
 
         public sbyte ToSByte(IFormatProvider provider)
@@ -168,7 +194,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public string ToString(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return this.ToString();
         }
 
         public object ToType(Type conversionType, IFormatProvider provider)
@@ -178,17 +204,17 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public ushort ToUInt16(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return (ushort)((uint)this.Number >> this.Fraction.Point);
         }
 
         public uint ToUInt32(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return ((uint)this.Number >> this.Fraction.Point);
         }
 
         public ulong ToUInt64(IFormatProvider provider)
         {
-            throw new NotImplementedException();
+            return ((uint)this.Number >> this.Fraction.Point);
         }
     }
 

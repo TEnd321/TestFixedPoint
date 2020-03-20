@@ -1,4 +1,4 @@
-﻿#define STUDENT_VERSION
+﻿//#define STUDENT_VERSION
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +13,14 @@ namespace FixedPointApiTest
 	{
 		static void Main(string[] args)
 		{
+			var f1 = new Fixed<Q8_24?>(248);
+			var f2 = new Fixed<Q8_24>(10);
+			var f3 = f1.Divide(f2);
+			Console.WriteLine(f1.ToUInt16(null));
+			Console.WriteLine(f1.ToInt16(null));
+			Console.WriteLine(f3.ToDouble(null));
+			Console.WriteLine(f3.ToDecimal(null));
+			Console.WriteLine(f3.ToDateTime(null));
 #if STUDENT_VERSION
 			Console.WriteLine(1234567890123456.7890123456789.ToString());
 			Console.WriteLine("Q24_8:");
