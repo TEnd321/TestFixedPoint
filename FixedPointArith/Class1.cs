@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace Cuni.Arithmetics.FixedPoint
@@ -7,7 +8,7 @@ namespace Cuni.Arithmetics.FixedPoint
     {
         int Point { get; }
     }
-    public interface IFixedArith<T> where T : IFixedPoint, new()
+    public interface IFixedArith<T> : IEquatable<IFixedArith<T>>, IConvertible, IComparable, IComparable<IFixedArith<T>> where T : IFixedPoint, new()
     {
         T Fraction { get; }
         int Number { get; }
@@ -35,11 +36,44 @@ namespace Cuni.Arithmetics.FixedPoint
         {
             return new Fixed<T>(this.Number + other.Number, false);
         }
-        
+
+        public int CompareTo(object obj)
+        {
+            if (obj is IFixedArith<T> ifa)
+            {
+                if (this.Number < ifa.Number)
+                    return -1;
+                else if (this.Number == ifa.Number)
+                    return 0;
+                else
+                    return 1;
+            }
+            throw new InvalidOperationException();
+        }
+
+        public int CompareTo([AllowNull] IFixedArith<T> other)
+        {
+            if (this.Number < other.Number)
+                return -1;
+            else if (this.Number == other.Number)
+                return 0;
+            else
+                return 1;
+        }
 
         public IFixedArith<T> Divide(IFixedArith<T> other)
         {
-            return new Fixed<T>((int)((((long)this.Number) << this.Fraction.Point) / ((long)other.Number)), false);
+            return new Fixed<T>((int)((((long)this.Number) << this.Fraction.Point) / other.Number), false);
+        }
+
+        public bool Equals([AllowNull] IFixedArith<T> other)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TypeCode GetTypeCode()
+        {
+            throw new NotImplementedException();
         }
 
         public IFixedArith<T> Multiply(IFixedArith<T> other)
@@ -54,6 +88,62 @@ namespace Cuni.Arithmetics.FixedPoint
         {
             return new Fixed<T>(this.Number - other.Number, false);
         }
+
+        public bool ToBoolean(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public byte ToByte(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public char ToChar(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime ToDateTime(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public decimal ToDecimal(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public double ToDouble(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public short ToInt16(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ToInt32(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public long ToInt64(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public sbyte ToSByte(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public float ToSingle(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
         public override string ToString()
         {
             int input = Number;
@@ -74,6 +164,31 @@ namespace Cuni.Arithmetics.FixedPoint
                 sb.Append(input >> Fraction.Point);
             }
             return sb.ToString();
+        }
+
+        public string ToString(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object ToType(Type conversionType, IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ushort ToUInt16(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public uint ToUInt32(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ulong ToUInt64(IFormatProvider provider)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -14,6 +14,7 @@ namespace FixedPointApiTest
 		static void Main(string[] args)
 		{
 #if STUDENT_VERSION
+			Console.WriteLine(1234567890123456.7890123456789.ToString());
 			Console.WriteLine("Q24_8:");
 			{
 				var f1 = new Fixed<Q24_8>(3);
