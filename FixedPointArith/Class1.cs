@@ -123,7 +123,7 @@ namespace Cuni.Arithmetics.FixedPoint
         }
 
         public double ToDouble(IFormatProvider provider)
-        { 
+        {
             return ((double)this.Number / (1 << this.Fraction.Point));
         }
 
@@ -253,25 +253,4 @@ namespace Cuni.Arithmetics.FixedPoint
             Point = 8;
         }
     }
-
-    public sealed class Printer
-    {
-        public static Printer Instance => new Printer();
-        Printer() { }
-        public string Print(long input, int point)
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.Append(input >> point);
-            for (int i = 0; ((input & ((1 << point) - 1)) > 0) && (i < point); i++)
-            {
-                if (i == 0)
-                    sb.Append('.');
-                input &= (1 << point) - 1;
-                input *= 10;
-                sb.Append(input >> point);
-            }
-            return sb.ToString();
-        }
-    }
-
 }
