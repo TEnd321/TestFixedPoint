@@ -1,4 +1,4 @@
-﻿//#define STUDENT_VERSION
+﻿#define STUDENT_VERSION
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +9,11 @@ using Cuni.Arithmetics.FixedPoint;
 
 namespace FixedPointApiTest
 {
+#if STUDENT_VERSION
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			var f1 = new Fixed<Q8_24>(625);
-			var f2 = new Fixed<Q8_24>(1000);
-			var f3 = f1.Divide(f2);
-			Console.WriteLine(f1.ToUInt64(null));
-			Console.WriteLine(f1.ToInt16(null));
-			Console.WriteLine(f1.ToChar(null));
-			Console.WriteLine("f3:");
-			Console.WriteLine(f3.ToDouble(null));
-			Console.WriteLine(f3.ToDecimal(null));
-			Console.WriteLine(f3.ToDateTime(null));
-#if STUDENT_VERSION
-			Console.WriteLine(1234567890123456.7890123456789.ToString());
 			Console.WriteLine("Q24_8:");
 			{
 				var f1 = new Fixed<Q24_8>(3);
@@ -117,7 +106,7 @@ namespace FixedPointApiTest
 				f3 = f1.Divide(f2);
 				Console.WriteLine($"625 / 1000: {f3}");
 			}
-#endif
 		}
 	}
+#endif
 }
