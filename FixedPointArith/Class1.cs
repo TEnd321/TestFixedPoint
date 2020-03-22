@@ -119,12 +119,12 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public decimal ToDecimal(IFormatProvider provider)
         {
-            return (this.Number >> this.Fraction.Point) + ((decimal)(this.Number & ((1 << this.Fraction.Point) - 1)) / (decimal)(Math.Pow(4, this.Fraction.Point / 4) * Math.Pow(4, this.Fraction.Point / 4)));
+            return ((decimal)this.Number / (1 << this.Fraction.Point));
         }
 
         public double ToDouble(IFormatProvider provider)
         { 
-            return (this.Number >> this.Fraction.Point) + ((double)(this.Number & ((1 << this.Fraction.Point) - 1)) / (Math.Pow(4, this.Fraction.Point / 4) * Math.Pow(4, this.Fraction.Point / 4)));
+            return ((double)this.Number / (1 << this.Fraction.Point));
         }
 
         public short ToInt16(IFormatProvider provider)
@@ -176,7 +176,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public float ToSingle(IFormatProvider provider)
         {
-            return (float)this.ToDouble(null);
+            return (float)this.ToDouble(provider);
         }
 
         public override string ToString()
@@ -223,7 +223,7 @@ namespace Cuni.Arithmetics.FixedPoint
 
         public ulong ToUInt64(IFormatProvider provider)
         {
-            return ((uint)this.Number >> this.Fraction.Point);
+            return ((ulong)this.Number >> this.Fraction.Point);
         }
     }
 

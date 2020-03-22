@@ -13,10 +13,10 @@ namespace FixedPointApiTest
 	{
 		static void Main(string[] args)
 		{
-			var f1 = new Fixed<Q8_24?>(40);
-			var f2 = new Fixed<Q8_24>(10);
+			var f1 = new Fixed<Q8_24>(625);
+			var f2 = new Fixed<Q8_24>(1000);
 			var f3 = f1.Divide(f2);
-			Console.WriteLine(f1.ToUInt16(null));
+			Console.WriteLine(f1.ToUInt64(null));
 			Console.WriteLine(f1.ToInt16(null));
 			Console.WriteLine(f1.ToChar(null));
 			Console.WriteLine("f3:");
